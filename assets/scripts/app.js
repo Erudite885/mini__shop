@@ -70,7 +70,6 @@ class ShoppingCart extends Component {
     <button>Order Now</button>
     `;
     this.totalOutput = cartEl.querySelector("h2");
-    // return cartElement;
   }
 }
 
@@ -86,7 +85,6 @@ class ProductItem extends Component {
 
   render() {
     const prodElement = this.createRootElement("li", "product-item");
-    // prodElement.className = "product-item";
     prodElement.innerHTML = `
             <div>
                 <img src="${this.product.imgUrl}" alt="${this.product.title}" >
@@ -100,7 +98,6 @@ class ProductItem extends Component {
         `;
     const addToCartButton = prodElement.querySelector("button");
     addToCartButton.addEventListener("click", this.addToCart.bind(this));
-    // return prodElement;
   }
 }
 class ProductList extends Component {
@@ -117,27 +114,19 @@ class ProductList extends Component {
     this.createRootElement("ul", "product-list", [
       new ElementAttribute("id", "prod-list"),
     ]);
-    // prodList.id = "prod-list";
-    // prodList.className = "product-list";
     for (const prod of this.products) {
       const productItem = new ProductItem(prod, "prod-list");
       productItem.render();
-      //   prodList.append(prodElement);
     }
-    // return prodList;
   }
 }
 
 class Shop {
   render() {
-    // const renderHook = document.getElementById("app");
-
     this.cart = new ShoppingCart("app");
     this.cart.render(); // i wasnt calling the cart.render earlier so i had the undefined error
     const productList = new ProductList("app");
     productList.render();
-
-    // renderHook.append(prodListEl);
   }
 }
 
