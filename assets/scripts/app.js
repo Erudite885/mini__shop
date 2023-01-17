@@ -62,9 +62,21 @@ class ProductItem {
 class ShoppingCart {
   items = [];
 
+  set cartItems(val) {
+    this.items = val;
+    this.totalOutput.innerHTML = `<h2>Total Amount: \$${this.totalAmount}</h2>`;
+  }
+
+  get totalAmount() {
+    const sum = this.items.reduce((pV, cI) => {
+      return pV + cI.price;
+    }, 0);
+  }
+
   addProduct(product) {
-    this.items.push(product);
-    this.totalOutput.innerHTML = `<h2>Total Amount: \$${1}</h2>`;
+    const updatedItems = [...this.items];
+    updatedItems.push(product);
+    this.cartItems = updatedItems;
   }
 
   render() {
