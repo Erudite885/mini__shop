@@ -3,13 +3,21 @@ class Product {
   imageUrl;
   description;
   price;
-}
 
+  constructor(title, img, desc, px) {
+    this.title = title;
+    this.imageUrl = img;
+    this.description = desc;
+    this.price = px;
+  }
+}
+// console.log(new Product());
 const productList = {
   products: [
-    new Product()
-    { title: "Carpet", imgUrl: "", price: 10, description: "a carpet" },
-    { title: "Pillow", imgUrl: "", price: 10, description: "a pillow" },
+    new Product("Carpet", "", "a carpet", 10),
+    new Product("Pillow", "", "a Pillow", 30),
+    // { title: "Carpet", imgUrl: "", price: 10, description: "a carpet" },
+    // { title: "Pillow", imgUrl: "", price: 10, description: "a pillow" },
   ],
   render() {
     const renderHook = document.getElementById("app");
