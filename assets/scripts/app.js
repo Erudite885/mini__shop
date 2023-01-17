@@ -19,9 +19,11 @@ class ElementAttribute {
   }
 }
 class Component {
-  constructor(renderHookId) {
+  constructor(renderHookId, shouldRender = true) {
     this.hookId = renderHookId;
-    this.render();
+    if (shouldRender) {
+      this.render();
+    }
   }
   render() {}
 
@@ -77,8 +79,9 @@ class ShoppingCart extends Component {
 
 class ProductItem extends Component {
   constructor(product, renderHookId) {
-    super(renderHookId);
+    super(renderHookId, false);
     this.product = product;
+    this.render();
   }
 
   addToCart() {
@@ -103,22 +106,32 @@ class ProductItem extends Component {
   }
 }
 class ProductList extends Component {
-  products = [
-    new Product("Carpet", "https://www.nothing.com", "a carpet", 10),
-    new Product("Pillow", "https://www.nothing.com", "a Pillow", 30),
-  ];
+  products = [];
 
   constructor(renderHookId) {
     super(renderHookId);
+    this.fetchProducts();
+  }
+  fetchProducts() {
+    this.products = [
+      new Product("Carpet", "https://www.nothing.com", "a carpet", 10),
+      new Product("Pillow", "https://www.nothing.com", "a Pillow", 30),
+    ];
+    this.renderProducts();
+  }
+
+  renderProducts() {
+    for (const prod of this.products) {
+      new ProductItem(prod, "prod-list");
+    }
   }
 
   render() {
     this.createRootElement("ul", "product-list", [
       new ElementAttribute("id", "prod-list"),
     ]);
-    for (const prod of this.products) {
-      new ProductItem(prod, "prod-list");
-      //   productItem.render();
+    if (this.products && this.products.length > 0) {
+      this.renderProducts();
     }
   }
 }
