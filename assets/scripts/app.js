@@ -24,7 +24,7 @@ class ProductList {
     prodList.className = "product-list";
     for (const product of this.products) {
       const productItem = new ProductItem(product);
-      const prodElement = productItem.render(); 
+      const prodElement = productItem.render();
       prodList.append(prodElement);
     }
     renderHook.append(prodList);
@@ -34,6 +34,11 @@ class ProductList {
 class ProductItem {
   constructor(product) {
     this.product = product;
+  }
+
+  addToCart() {
+    console.log(this.product);
+    console.log("Adding product to cart");
   }
 
   render() {
@@ -50,6 +55,8 @@ class ProductItem {
                 </div>
             </div>
         `;
+    const addToCartButton = prodElement.querySelector("button");
+    addToCartButton.addEventListener("click", this.addToCart.bind(this));
     return prodElement;
   }
 }
