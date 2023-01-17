@@ -71,6 +71,7 @@ class ShoppingCart {
     const sum = this.items.reduce((pV, cI) => {
       return pV + cI.price;
     }, 0);
+    return sum;
   }
 
   addProduct(product) {
