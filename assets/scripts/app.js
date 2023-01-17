@@ -63,6 +63,11 @@ class ProductItem {
 class ShoppingCart {
   items = [];
 
+  addProduct(product) {
+    this.items.push(product);
+    this.totalOutput.innerHTML = `<h2>Total: \$${1}</h2>`;
+  }
+
   render() {
     const cartElement = document.createElement("section");
     cartElement.innerHTML = `
@@ -70,6 +75,7 @@ class ShoppingCart {
         <button>Order Now</button>
     `;
     cartElement.className = "cart";
+    this.totalOutput = cartElement.querySelector("h2");
     return cartElement;
   }
 }
