@@ -113,14 +113,15 @@ class ProductItem extends Component {
   }
 }
 class ProductList extends Component {
-  products = [];
+  #products = [];
 
   constructor(renderHookId) {
-    super(renderHookId);
+    super(renderHookId, false);
+    this.render();
     this.fetchProducts();
   }
   fetchProducts() {
-    this.products = [
+    this.#products = [
       new Product("Carpet", "https://www.nothing.com", "a carpet", 10),
       new Product("Pillow", "https://www.nothing.com", "a Pillow", 30),
     ];
@@ -128,7 +129,7 @@ class ProductList extends Component {
   }
 
   renderProducts() {
-    for (const prod of this.products) {
+    for (const prod of this.#products) {
       new ProductItem(prod, "prod-list");
     }
   }
@@ -137,7 +138,7 @@ class ProductList extends Component {
     this.createRootElement("ul", "product-list", [
       new ElementAttribute("id", "prod-list"),
     ]);
-    if (this.products && this.products.length > 0) {
+    if (this.#products && this.#products.length > 0) {
       this.renderProducts();
     }
   }
